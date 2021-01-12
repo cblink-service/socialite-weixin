@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialiteProviders\Weixin;
+namespace Cblink\Service\SocialiteWeixin;
 
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 use SocialiteProviders\Manager\OAuth2\User;
@@ -10,7 +10,7 @@ class Provider extends AbstractProvider
     /**
      * Unique Provider Identifier.
      */
-    public const IDENTIFIER = 'WEIXIN';
+    public const IDENTIFIER = 'CBLINK-WEIXIN';
 
     /**
      * @var string
@@ -37,7 +37,11 @@ class Provider extends AbstractProvider
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase('https://open.weixin.qq.com/connect/oauth2/authorize', $state);
+        $baseUrl = $this->config['sandbox'] ?
+            'https://dev-wechat.service.cblink.net/' :
+            'https://wechat.service.cblink.net/';
+
+        return $this->buildAuthUrlFromBase(sprintf('%sapi/official/auth/%s/handle', $baseUrl, $this->config['uuid']), $state);
     }
 
     /**
@@ -56,7 +60,7 @@ class Provider extends AbstractProvider
     protected function getCodeFields($state = null)
     {
         return [
-            'appid'         => $this->clientId, 'redirect_uri' => $this->redirectUrl,
+            'redirect_uri' => $this->redirectUrl,
             'response_type' => 'code',
             'scope'         => $this->formatScopes($this->scopes, $this->scopeSeparator),
             'state'         => $state,
@@ -114,8 +118,10 @@ class Provider extends AbstractProvider
     protected function getTokenFields($code)
     {
         return [
-            'appid' => $this->clientId, 'secret' => $this->clientSecret,
-            'code'  => $code, 'grant_type' => 'authorization_code',
+            'appid' => $this->clientId,
+            'secret' => $this->clientSecret,
+            'code'  => $code,
+            'grant_type' => 'authorization_code',
         ];
     }
 

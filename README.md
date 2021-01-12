@@ -1,7 +1,7 @@
 # Weixin
 
 ```bash
-composer require socialiteproviders/weixin
+composer require cblink-service/socialite-weixin
 ```
 
 ## Installation & Basic Usage
@@ -11,7 +11,9 @@ Please see the [Base Installation Guide](https://socialiteproviders.com/usage/),
 ### Add configuration to `config/services.php`
 
 ```php
-'weixin' => [    
+'cblink-weixin' => [    
+  'sandbox' => env('WEIXIN_SANDBOX', false),
+  'uuid' => env('WEIXIN_UUID'),
   'client_id' => env('WEIXIN_CLIENT_ID'),  
   'client_secret' => env('WEIXIN_CLIENT_SECRET'),  
   'redirect' => env('WEIXIN_REDIRECT_URI') 
@@ -28,7 +30,7 @@ Add the event to your `listen[]` array in `app/Providers/EventServiceProvider`. 
 protected $listen = [
     \SocialiteProviders\Manager\SocialiteWasCalled::class => [
         // ... other providers
-        'SocialiteProviders\\Weixin\\WeixinExtendSocialite@handle',
+        'Cblink\\Service\\SocialiteWeixin\\WeixinExtendSocialite@handle',
     ],
 ];
 ```
@@ -38,7 +40,7 @@ protected $listen = [
 You should now be able to use the provider like you would regularly use Socialite (assuming you have the facade installed):
 
 ```php
-return Socialite::driver('weixin')->redirect();
+return Socialite::driver('cblink-weixin')->redirect();
 ```
 
 ### Returned User fields

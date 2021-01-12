@@ -1,17 +1,7 @@
 {
-    "name": "socialiteproviders/weixin",
+    "name": "cblink-service/socialite-weixin",
     "description": "Weixin OAuth2 Provider for Laravel Socialite",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "xyxu",
-            "email": "techxu@gmail.com"
-        },
-        {
-            "name": "xiami",
-            "email": "jhdxr@php.net"
-        }
-    ],
     "require": {
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
@@ -19,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SocialiteProviders\\Weixin\\": ""
+            "Cblink\\Service\\SocialiteWeixin\\": ""
         }
     }
 }

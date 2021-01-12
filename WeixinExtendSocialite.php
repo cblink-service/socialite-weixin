@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialiteProviders\Weixin;
+namespace Cblink\Service\SocialiteWeixin;
 
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
@@ -13,6 +13,6 @@ class WeixinExtendSocialite
      */
     public function handle(SocialiteWasCalled $socialiteWasCalled)
     {
-        $socialiteWasCalled->extendSocialite('weixin', Provider::class);
+        $socialiteWasCalled->extendSocialite('cblink-weixin', Provider::class);
     }
 }
