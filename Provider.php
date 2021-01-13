@@ -60,7 +60,7 @@ class Provider extends AbstractProvider
     protected function getCodeFields($state = null)
     {
         return [
-            'redirect_uri' => $this->redirectUrl,
+            'redirect_url' => $this->redirectUrl,
             'response_type' => 'code',
             'scope'         => $this->formatScopes($this->scopes, $this->scopeSeparator),
             'state'         => $state,
@@ -140,5 +140,13 @@ class Provider extends AbstractProvider
         }
 
         return $this->credentialsResponseBody;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function additionalConfigKeys(): array
+    {
+        return ['uuid', 'sandbox'];
     }
 }
