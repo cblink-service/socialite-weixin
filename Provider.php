@@ -59,6 +59,8 @@ class Provider extends AbstractProvider
      */
     protected function getCodeFields($state = null)
     {
+        $state = $state ?: $this->request->input('state');
+
         return [
             'redirect_url' => $this->redirectUrl,
             'response_type' => 'code',
